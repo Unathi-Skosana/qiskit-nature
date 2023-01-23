@@ -22,7 +22,7 @@ type    -- "i", "d", or "c" for integer (int32), double, or
 asym    -- whether any lower-triangular indices are antisymmetric/anti-Hermetian
            (True) or symmetric/Hermetian (False).
 
-nelem   -- number of elements per set of indicies.  Usually 1, but
+nelem   -- number of elements per set of indices.  Usually 1, but
            2 or 3 for raffenetti 1,2 or 1,2, and 3 integrals.
 
 dimens   -- tuple with up to 5 dimensions, negative values for lower-triangular
@@ -47,7 +47,7 @@ OpMat (name,array,nelem=1,type=None,asym=False,dimens=None):
   and only matters if dimens marks some some indices as lower
   triangular/tetrahedral/etc.  dimens defaults to one dimension
   determined by the size of the array (i.e., array.size/nelem)
-  
+
 print_mat (wid=1,**kwargs):
   print the matrix; wid selects different line lengths and formats.
   this is also invoked indirectly when the __str__ method is used.
@@ -57,7 +57,7 @@ print_mat (wid=1,**kwargs):
   which the sign should be flipped (or complex conjugate taken).
   This takes fortran-style indices -- starting at 1 with the
   leftmost fastest running
-  
+
 (ind,sign) = make_indxc (*args):
   return an index into the array for a given set of arguments and
   which the sign should be flipped (or complex conjugate taken).
@@ -406,9 +406,9 @@ class OpMat (object):
     ntot = self.lenarray
     n1 = self.dimens[0]
     n2 = self.dimens[1] if len(self.dimens) >= 2 else 1
-    n3 = self.dimens[2] if len(self.dimens) >= 3 else 1  
-    n4 = self.dimens[3] if len(self.dimens) >= 4 else 1  
-    n5 = self.dimens[3] if len(self.dimens) >= 5 else 1  
+    n3 = self.dimens[2] if len(self.dimens) >= 3 else 1
+    n4 = self.dimens[3] if len(self.dimens) >= 4 else 1
+    n5 = self.dimens[3] if len(self.dimens) >= 5 else 1
     return (self.name,ni,nr,nri,ntot,n1,n2,n3,n4,n5,self.asym)
 
   def print_mat (self,wid=1,doinp=False,**kwargs):
@@ -448,7 +448,7 @@ class OpMat (object):
 
   def make_indxf (self,*args):
     return _makeindx(self.dimens,self.asym,args)
-  
+
   def make_indxc (self,*args):
     return _makeindxc(self.dimens,self.asym,args)
 
@@ -467,7 +467,7 @@ class OpMat (object):
       if self.type == "c": val = val.conjugate()
       if self.asym: val = -val
     return val
-  
+
   def set_elemf (self,value,*args):
     indx,sign = _makeindx(self.dimens,self.asym,args)
     val = value
@@ -485,7 +485,7 @@ class OpMat (object):
       if self.asym: val = -val
     self.array[indx] = val
     return self.array[indx]
-  
+
   def expand (self):
     d = tuple(reversed([abs(num) for num in self.dimens]))
     if qcmio.aoints(self.name):

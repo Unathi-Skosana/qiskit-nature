@@ -52,7 +52,7 @@ class TriangularLattice(Lattice):
         return [(node_a, node_a, onsite_parameter) for node_a in range(num_nodes)]
 
     def _bulk_edges(self) -> List[Tuple[int, int, complex]]:
-        """Return a list consisting of the edges in th bulk, which don't cross the boundaries.
+        """Return a list consisting of the edges in the bulk, which don't cross the boundaries.
 
         Returns:
             List[Tuple[int, int, complex]] : List of weighted edges that don't cross the boundaries.
